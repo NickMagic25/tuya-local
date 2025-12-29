@@ -64,6 +64,7 @@ entities:
         mask: 01  # bit0 set => bowl 1 present
         endianness: big
         optional: true
+        force: true
         mapping:
           - dps_val: null
             value: false
@@ -80,6 +81,7 @@ entities:
         mask: 02  # bit1 set => bowl 2 present
         endianness: big
         optional: true
+        force: true
         mapping:
           - dps_val: null
             value: false
@@ -96,6 +98,7 @@ entities:
         mask: 04  # bit2 set => bowl 3 present
         endianness: big
         optional: true
+        force: true
         mapping:
           - dps_val: null
             value: false
