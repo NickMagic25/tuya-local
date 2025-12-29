@@ -1050,7 +1050,7 @@ port and password.
 - Tonepie T1PRO cat litter box
 - Tonepie T1 Pro MAX cat litter box
 - V330L pet feeder
-- Vacqueen Automatic Cat Feeder for 3 Cat
+- Vacqueen Automatic Cat Feeder for 3 Cats
 - Vevor 76L self-cleaning litter box
 - WellToBe Automatic Pet Feeder (WB S36D)
 - YP pet feeder
