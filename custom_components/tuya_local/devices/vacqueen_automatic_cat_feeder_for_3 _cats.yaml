@@ -48,6 +48,7 @@ entities:
         name: sensor
         mask: 000000000000ffffff  # last 3 bytes
         optional: true
+        force: true
         mapping:
           - dps_val: null
             value: false
