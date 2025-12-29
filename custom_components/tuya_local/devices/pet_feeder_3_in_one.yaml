@@ -37,30 +37,6 @@ entities:
         name: sensor
         type: integer
         unit: "%"
-# for determining if the feed bowl has an error. If feed actual does not match feed requested, there was an error.
-  - entity: sensor
-    name: Feed report (raw)
-    dps:
-      - id: 103
-        type: base64
-        name: value
-        optional: true
-  - entity: sensor
-    name: Feed actual
-    dps:
-      - id: 103
-        type: base64
-        name: sensor
-        mask: ffffff000000000000  # first 3 bytes
-        optional: true
-  - entity: sensor
-    name: Feed requested
-    dps:
-      - id: 103
-        type: base64
-        name: sensor
-        mask: 000000ffffff000000  # middle 3 bytes
-        optional: true
   - entity: binary_sensor
     name: Feed error
     class: problem
@@ -73,6 +49,8 @@ entities:
         mask: 000000000000ffffff  # last 3 bytes
         optional: true
         mapping:
+          - dps_val: null
+            value: false
           - dps_val: 0
             value: false
           - value: true
