@@ -2,6 +2,7 @@ name: Pet feeder with 3 bowls
 products:
   - id: avejovp9ys7edcbf
     name: "志逸鸿3盘喂食器WIFI款"
+    manufacturer: "Vacqueen"
 entities:
   - entity: button
     name: Manual feed
