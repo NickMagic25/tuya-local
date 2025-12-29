@@ -8,32 +8,70 @@ entities:
     category: config
     icon: "mdi:food-drumstick"
     dps:
-      # Sends 1 serving to each bowl (0x01 0x01 0x01).
-      # Adjust dps_val if you need different per-bowl amounts.
+# Sends 1 serving to each bowl (0x01 0x01 0x01).
       - id: 101
         type: base64
         name: button
+        persist: false
         mapping:
           - dps_val: AQEB
             value: true
-
   - entity: text
     name: Meal plan
     category: config
     hidden: true
     dps:
-     # meal plan is in base64 hex in the following format: [day][hour][minute][bowl1 servings][bowl2 servings][bowl3 servings][enable][padding]
-     #ex: 7f08000303030100 feeds every day at 8:00, 3 servings from each bowl, enabled, padding
+  # meal plan is in base64 hex in the following format: [day][hour][minute][bowl1 servings][bowl2 servings][bowl3 servings][enable][padding]
+  # ex: 7f08000303030100 feeds every day at 8:00, 3 servings from each bowl, enabled, padding
       - id: 102
         type: base64
         name: value
         optional: true
-
   - entity: sensor
     name: Battery
     class: battery
+    category: diagnostic
     dps:
       - id: 10
         name: sensor
         type: integer
         unit: "%"
+# for determining if the feed bowl has an error. If feed actual does not match feed requested, there was an error.
+  - entity: sensor
+    name: Feed report (raw)
+    dps:
+      - id: 103
+        type: base64
+        name: value
+        optional: true
+  - entity: sensor
+    name: Feed actual
+    dps:
+      - id: 103
+        type: base64
+        name: sensor
+        mask: ffffff000000000000  # first 3 bytes
+        optional: true
+  - entity: sensor
+    name: Feed requested
+    dps:
+      - id: 103
+        type: base64
+        name: sensor
+        mask: 000000ffffff000000  # middle 3 bytes
+        optional: true
+  - entity: binary_sensor
+    name: Feed error
+    class: problem
+    category: diagnostic
+    dps:
+      # Checks the reserved bytes in the feed report; any non-zero value is treated as an error.
+      - id: 103
+        type: base64
+        name: sensor
+        mask: 000000000000ffffff  # last 3 bytes
+        optional: true
+        mapping:
+          - dps_val: 0
+            value: false
+          - value: true
