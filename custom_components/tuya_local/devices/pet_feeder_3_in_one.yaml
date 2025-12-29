@@ -61,7 +61,8 @@ entities:
       - id: 105
         type: base64
         name: sensor
-        mask: 0000000000000001
+        mask: 01  # bit0 set => bowl 1 present
+        endianness: big
         optional: true
         mapping:
           - dps_val: null
@@ -76,7 +77,8 @@ entities:
       - id: 105
         type: base64
         name: sensor
-        mask: 0000000000000002
+        mask: 02  # bit1 set => bowl 2 present
+        endianness: big
         optional: true
         mapping:
           - dps_val: null
@@ -91,7 +93,8 @@ entities:
       - id: 105
         type: base64
         name: sensor
-        mask: 0000000000000004
+        mask: 04  # bit2 set => bowl 3 present
+        endianness: big
         optional: true
         mapping:
           - dps_val: null
