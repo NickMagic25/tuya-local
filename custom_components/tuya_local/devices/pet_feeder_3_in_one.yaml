@@ -42,11 +42,56 @@ entities:
     class: problem
     category: diagnostic
     dps:
-      # Checks the reserved bytes in the feed report; any non-zero value is treated as an error.
+  # Checks the reserved bytes in the feed report; any non-zero value is treated as an error.
       - id: 103
         type: base64
         name: sensor
         mask: 000000000000ffffff  # last 3 bytes
+        optional: true
+        mapping:
+          - dps_val: null
+            value: false
+          - dps_val: 0
+            value: false
+          - value: true
+  - entity: binary_sensor
+    name: Bowl 1 present
+    category: diagnostic
+    dps:
+      - id: 105
+        type: base64
+        name: sensor
+        mask: 0000000000000001
+        optional: true
+        mapping:
+          - dps_val: null
+            value: false
+          - dps_val: 0
+            value: false
+          - value: true
+  - entity: binary_sensor
+    name: Bowl 2 present
+    category: diagnostic
+    dps:
+      - id: 105
+        type: base64
+        name: sensor
+        mask: 0000000000000002
+        optional: true
+        mapping:
+          - dps_val: null
+            value: false
+          - dps_val: 0
+            value: false
+          - value: true
+  - entity: binary_sensor
+    name: Bowl 3 present
+    category: diagnostic
+    dps:
+      - id: 105
+        type: base64
+        name: sensor
+        mask: 0000000000000004
         optional: true
         mapping:
           - dps_val: null
