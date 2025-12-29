@@ -8,11 +8,13 @@ entities:
     category: config
     icon: "mdi:food-drumstick"
     dps:
-      - id: 3
-        type: integer
+      # Sends 1 serving to each bowl (0x01 0x01 0x01).
+      # Adjust dps_val if you need different per-bowl amounts.
+      - id: 101
+        type: base64
         name: button
         mapping:
-          - dps_val: 1
+          - dps_val: AQEB
             value: true
 
   - entity: text
@@ -23,18 +25,6 @@ entities:
      # meal plan is in base64 hex in the following format: [day][hour][minute][bowl1 servings][bowl2 servings][bowl3 servings][enable][padding]
      #ex: 7f08000303030100 feeds every day at 8:00, 3 servings from each bowl, enabled, padding
       - id: 102
-        type: base64
-        name: value
-        optional: true
-
-  - entity: text
-    name: Manual feed Ammount
-    category: config
-    hidden: true
-    dps:
-     # manual feed is in base64 hex in the following format: [bowl1 servings][bowl2 servings][bowl3 servings][padding]
-     # ex: 03 00 00 00 00 00 00 03 feeds 3 servings from bowl 1
-      - id: 101
         type: base64
         name: value
         optional: true
