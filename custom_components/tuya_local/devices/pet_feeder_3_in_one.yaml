@@ -2,21 +2,43 @@ name: Pet feeder with 3 bowls
 products:
   - id: avejovp9ys7edcbf
     name: "志逸鸿3盘喂食器WIFI款"
+entities:
+  - entity: button
+    name: Manual feed
+    category: config
+    icon: "mdi:food-drumstick"
+    dps:
+      - id: 3
+        type: integer
+        name: button
+        mapping:
+          - dps_val: 1
+            value: true
 
-primary_entity:
-  entity: button
-  name: Feed now
-  icon: "mdi:food-drumstick"
-  dps:
-    # DP 3: manual_feed (value) - writing 1 dispenses once
-    - id: 3
-      name: press
-      type: integer
-      mapping:
-        - dps_val: 1
-          value: true
+  - entity: text
+    name: Meal plan
+    category: config
+    hidden: true
+    dps:
+     # meal plan is in base64 hex in the following format: [day][hour][minute][bowl1 servings][bowl2 servings][bowl3 servings][enable][padding]
+     #ex: 7f08000303030100 feeds every day at 8:00, 3 servings from each bowl, enabled, padding
+      - id: 102
+        type: base64
+        name: value
+        optional: true
 
-secondary_entities:
+  - entity: text
+    name: Manual feed Ammount
+    category: config
+    hidden: true
+    dps:
+     # manual feed is in base64 hex in the following format: [bowl1 servings][bowl2 servings][bowl3 servings][padding]
+     # ex: 03 00 00 00 00 00 00 03 feeds 3 servings from bowl 1
+      - id: 101
+        type: base64
+        name: value
+        optional: true
+
   - entity: sensor
     name: Battery
     class: battery
@@ -25,94 +47,3 @@ secondary_entities:
         name: sensor
         type: integer
         unit: "%"
-
-  - entity: binary_sensor
-    name: Charging
-    class: battery_charging
-    category: diagnostic
-    dps:
-      - id: 11
-        name: sensor
-        type: boolean
-
-  - entity: sensor
-    name: Fault bitmap
-    icon: "mdi:alert-circle-outline"
-    category: diagnostic
-    dps:
-      - id: 14
-        name: sensor
-        type: integer
-
-  - entity: sensor
-    name: Feed report
-    icon: "mdi:history"
-    category: diagnostic
-    dps:
-      - id: 15
-        name: sensor
-        type: integer
-
-  # Debug-only: schedule data (Tuya app payload)
-  - entity: sensor
-    name: App feed plan raw
-    icon: "mdi:calendar-clock"
-    category: diagnostic
-    dps:
-      - id: 102
-        name: sensor
-        type: string
-        optional: true
-
-  # Debug-only: feeder/bowl state (raw bytes/base64-like)
-  - entity: sensor
-    name: Food bowl state raw
-    icon: "mdi:bowl-mix-outline"
-    category: diagnostic
-    dps:
-      - id: 105
-        name: sensor
-        type: string
-        optional: true
-
-  # Debug-only: other raw telemetry you showed earlier
-  - entity: sensor
-    name: App feed raw
-    icon: "mdi:send"
-    category: diagnostic
-    dps:
-      - id: 101
-        name: sensor
-        type: string
-        optional: true
-
-  - entity: sensor
-    name: App feed report raw
-    icon: "mdi:check-decagram-outline"
-    category: diagnostic
-    dps:
-      - id: 103
-        name: sensor
-        type: string
-        optional: true
-
-  - entity: sensor
-    name: Plan feed report raw
-    icon: "mdi:clipboard-text-clock-outline"
-    category: diagnostic
-    dps:
-      - id: 104
-        name: sensor
-        type: string
-        optional: true
-
-  # Debug-only: device-side schedule blob
-  - entity: sensor
-    name: Meal plan raw
-    icon: "mdi:calendar"
-    category: diagnostic
-    dps:
-      - id: 1
-        name: sensor
-        type: string
-        optional: true
